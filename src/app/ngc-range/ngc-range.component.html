@@ -1,0 +1,15 @@
+<div class="input-range" #inputRange (click)="setValue($event)" (drop)="disallowChangeMinValue();disallowChangeMaxValue();">
+  <div class="slider">
+    <div class="slider slider-range" [style.left.%]="range.lower" [style.width.%]="range.difference">
+    </div>
+    <div class="bullet-container" style="position: absolute;" [style.left.%]="range.lower" [ngClass]="canSetMin ? 'dragging' : ''"
+      >
+      <div class="bullet" draggable (drag)="setMin($event)" (dragstop)="disallowChangeMinValue()" (mousedown)="allowChangeMinValue()">
+      </div>
+    </div>
+    <div class="bullet-container" style="position: absolute;" [style.left.%]="range.upper" [ngClass]="canSetMax ? 'dragging' : ''">
+      <div class="bullet" draggable (mousedown)="allowChangeMaxValue()" (drag)="setMax($event)" (dragstop)="disallowChangeMaxValue()">
+      </div>
+    </div>
+  </div>
+</div>
