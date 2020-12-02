@@ -11,19 +11,28 @@ export class AppComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.rangeValuesForm = this.formBuilder.group({
-      minValue: [0],
-      maxValue: [100]
+      minValue: this.rangeValues[0],
+      maxValue: this.rangeValues[1]
     });
   }
 
-  values: number[] = [0, 100];
+  rangeValues: number[] = [0, 100];
 
   rangeValuesForm: FormGroup;
 
   ngOnInit(): void {
 
     this.rangeValuesForm.valueChanges.subscribe(
-      formValue => this.values = [formValue.minValue, formValue.maxValue]
+      formValue => this.rangeValues = [formValue.minValue, formValue.maxValue]
     );
+  }
+
+  onRangeChange(event): void {
+    if (!!event) {
+      this.rangeValuesForm.patchValue({
+        minValue: event[0],
+        maxValue: event[1]
+        });
+    }
   }
 }

@@ -1,15 +1,35 @@
-<div class="input-range" #inputRange (click)="setValue($event)" (drop)="disallowChangeMinValue();disallowChangeMaxValue();">
-  <div class="slider">
-    <div class="slider slider-range" [style.left.%]="range.lower" [style.width.%]="range.difference">
-    </div>
-    <div class="bullet-container" style="position: absolute;" [style.left.%]="range.lower" [ngClass]="canSetMin ? 'dragging' : ''"
-      >
-      <div class="bullet" draggable (drag)="setMin($event)" (dragstop)="disallowChangeMinValue()" (mousedown)="allowChangeMinValue()">
+<div class="container row">
+    <ng-container *ngIf="showMinInput; else minLabelTemplate">
+      <input  (mouseout)="toggleMinInput(false)" autofocus (load)="lower.focus()" class="form-control col-1" type="number" [min]="range.min" [max]="range.upper" #lower [(ngModel)]="values[0]" (ngModelChange)="range.lower=lower.value">
+    </ng-container>
+    <ng-template #minLabelTemplate>
+      <label class="col-1" (click)="toggleMinInput(true)">{{values[0]}}</label>
+    </ng-template>
+
+  <div class="input-range col-7" #inputRange (click)="setValue($event)"
+    (drop)="disallowChangeMinValue();disallowChangeMaxValue();">
+    <div class="slider">
+      <div class="slider slider-range" [style.left.%]="range.lower" [style.width.%]="range.difference">
       </div>
-    </div>
-    <div class="bullet-container" style="position: absolute;" [style.left.%]="range.upper" [ngClass]="canSetMax ? 'dragging' : ''">
-      <div class="bullet" draggable (mousedown)="allowChangeMaxValue()" (drag)="setMax($event)" (dragstop)="disallowChangeMaxValue()">
+      <div class="bullet-container" style="position: absolute;" [style.left.%]="range.lower"
+        [ngClass]="canSetMin ? 'dragging' : ''">
+        <div class="bullet" (drag)="setMin($event)" (dragstop)="disallowChangeMinValue()"
+          (mousedown)="allowChangeMinValue()">
+        </div>
+      </div>
+      <div class="bullet-container" style="position: absolute;" [style.left.%]="range.upper"
+        [ngClass]="canSetMax ? 'dragging' : ''">
+        <div class="bullet" (mousedown)="allowChangeMaxValue()" (drag)="setMax($event)"
+          (dragstop)="disallowChangeMaxValue()">
+        </div>
       </div>
     </div>
   </div>
+
+    <ng-container *ngIf="showMaxInput; else maxLabelTemplate">
+      <input (mouseout)="toggleMaxInput(false)" autofocus (load)="upper.focus()" [min]="range.lower" [max]="range.max" class="form-control col-1" type="number" #upper [(ngModel)]="values[1]" (ngModelChange)="range.upper=upper.value">
+    </ng-container>
+    <ng-template #maxLabelTemplate>
+      <label class="col-1" (click)="toggleMaxInput(true)">{{values[1]}}</label>
+    </ng-template>
 </div>

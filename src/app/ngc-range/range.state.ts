@@ -30,8 +30,8 @@ export class RangeState {
   }
   public set lower(v: number) {
     if (this.validate(v, this.upperRange)) {
-      this.lowerRange = v;
-      this.range = this.upperRange - v;
+      this.lowerRange = Math.round(v);
+      this.range = this.upperRange - Math.round(v);
     }
   }
 
@@ -40,8 +40,8 @@ export class RangeState {
   }
   public set upper(v: number) {
     if (this.validate(this.lowerRange, v)) {
-      this.upperRange = v;
-      this.range = v - this.lowerRange;
+      this.upperRange = Math.round(v);
+      this.range = Math.round(v) - this.lowerRange;
     }
   }
 

@@ -1,15 +1,7 @@
 <div class="container">
-  <div class="row">
-    <form [formGroup]="rangeValuesForm">
-      <div class="col">
-        <input type="number" formControlName="minValue">
+  <div>
+      <div >
+        <app-ngc-range [min]="0" [max]="100" [(values)]="rangeValues" (valuesChange)="onRangeChange($event)"></app-ngc-range>
       </div>
-      <div class="col">
-        <app-ngc-range [min]="0" [max]="100" [(values)]="values"></app-ngc-range>
-      </div>
-      <div class="col">
-        <input type="number" formControlName="maxValue">
-      </div>
-    </form>
   </div>
 </div>

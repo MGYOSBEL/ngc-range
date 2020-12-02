@@ -12,6 +12,9 @@ export class NgcRangeComponent implements OnInit {
   canSetMax = false;
   canSetMin = false;
 
+  showMinInput = false;
+  showMaxInput = false;
+
   @Input()
   values: number[];
 
@@ -70,7 +73,12 @@ export class NgcRangeComponent implements OnInit {
       this.range.lower,
       this.range.upper
     ]);
-    console.log(this.range);
+  }
+  toggleMinInput(value: boolean): void {
+    this.showMinInput = value;
+  }
+  toggleMaxInput(value: boolean): void {
+    this.showMaxInput = value;
   }
 
   allowChangeMinValue(): void {
