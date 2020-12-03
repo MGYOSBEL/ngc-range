@@ -12,9 +12,9 @@ export class DataService {
     ) { }
 
   exercise1(): Observable<{min, max}> {
-    return this.http.get<{min, max}>(`http://demo2826583.mockable.io/exercise1`);
+    return this.http.get<{min, max}>(`https://demo2826583.mockable.io/exercise1`);
   }
   exercise2(): Observable<number[]> {
-    return this.http.get<number[]>(`http://demo2826583.mockable.io/exercise2`);
+    return this.http.get<number[]>(`https://demo2826583.mockable.io/exercise2`);
   }
 }

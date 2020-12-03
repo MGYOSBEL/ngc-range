@@ -122,8 +122,13 @@
               "devServerTarget": "ngc-range:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "ngc-range"
 }

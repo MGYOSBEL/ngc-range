@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ngc-range"
+  },
+  "targets": {
+    "ngc-range": {
+      "hosting": {
+        "ngc-range": [
+          "ngc-range"
+        ]
+      }
+    }
+  }
+}
