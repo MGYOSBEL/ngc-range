@@ -1,0 +1,8 @@
+<div class="container">
+  <div>
+      <p>Please select the prices you want to filter by:</p>
+      <div *ngIf="limitValues.length > 0">
+        <app-ngc-range [min]="limitValues[0]" [max]="limitValues[1]" [(values)]="rangeValues" (valuesChange)="onRangeChange($event)"></app-ngc-range>
+      </div>
+  </div>
+</div>

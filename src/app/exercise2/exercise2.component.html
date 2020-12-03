@@ -1,0 +1,8 @@
+<div class="container">
+  <div>
+      <p>Please select the prices you want to filter by:</p>
+      <div *ngIf="rangeValues.length > 0">
+        <app-ngc-range [type]="'fixed'" [(values)]="rangeValues" (valuesChange)="onRangeChange($event)"></app-ngc-range>
+      </div>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 
 .input-range {
   position: relative;
-  // width: 90%;
   height: 0.5rem;
   margin: 0.5rem 0;
 }
@@ -15,7 +14,9 @@
 }
 
 .dragging {
-  cursor: grab;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+  cursor: -moz-grabbing;
 }
 
 .slider-range {
@@ -28,15 +29,17 @@
   width: 0.5rem;
   height: 0.5rem;
   margin: -0.35rem 0 0;
-  cursor: pointer;
   background: black;
   border: 1px solid black;
   border-radius: 50%;
 }
 
-.bullet:hover {
+.bullet:hover, .bullet-container:hover {
   transform: scale(1.2);
-  cursor: pointer;
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+
 }
 
 input[type=number]{
@@ -44,7 +47,8 @@ input[type=number]{
   border: none;
   box-shadow: none;
   overflow: visible;
-  text-align: end;
+  text-align: start;
+  padding-top: 0;
 }
 input[type=number]::-webkit-inner-spin-button {
 margin-right: -1rem;

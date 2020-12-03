@@ -8,7 +8,7 @@ import { RangeState } from './range.state';
 })
 export class NgcRangeComponent implements OnInit {
 
-  range = new RangeState();
+  range: RangeState;
   canSetMax = false;
   canSetMin = false;
 
@@ -20,6 +20,7 @@ export class NgcRangeComponent implements OnInit {
 
   @Input() min: number;
   @Input() max: number;
+  @Input() type: string = 'normal';
 
   @Output()
   valuesChange = new EventEmitter<number[]>();
@@ -30,17 +31,23 @@ export class NgcRangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.values) {
-      this.range = new RangeState(this.min, this.max, this.values[0], this.values[1]);
-    }
-
+    console.log(`initializing ngc-range with type: ${this.type} and values ${this.values}`);
+    const options = {
+      min: this.min,
+      max: this.max,
+      lower: this.values[0],
+      upper: this.values[1],
+      values: [...this.values]
+    };
+    this.range = new RangeState(this.type, options);
+    console.log(this.range, this.values);
   }
 
   setMin(event): void {
     if (this.canSetMin) {
       const element = this.inputRange.nativeElement;
       const variation = (event.clientX - element.offsetLeft) * 100 / element.clientWidth;
-      this.range.lower = variation;
+      this.range.lowerPercent = variation;
       this.notifyChangeValues();
     }
   }
@@ -49,7 +56,7 @@ export class NgcRangeComponent implements OnInit {
     if (this.canSetMax) {
       const element = this.inputRange.nativeElement;
       const variation = (event.clientX - element.offsetLeft) * 100 / element.clientWidth;
-      this.range.upper = variation;
+      this.range.upperPercent = variation;
       this.notifyChangeValues();
     }
   }
@@ -59,12 +66,9 @@ export class NgcRangeComponent implements OnInit {
     this.canSetMin = false;
     const element = this.inputRange.nativeElement;
     const coordinate = (event.clientX - element.offsetLeft) * 100 / element.clientWidth;
-    if (coordinate < this.range.lower) {
-      this.range.lower = coordinate;
-    }
-    if (coordinate > this.range.upper) {
-      this.range.upper = coordinate;
-    }
+    const upperDistance = Math.abs(coordinate - this.range.upperPercent);
+    const lowerDistance = Math.abs(coordinate - this.range.lowerPercent);
+    upperDistance < lowerDistance ? this.range.upperPercent = coordinate : this.range.lowerPercent = coordinate;
     this.notifyChangeValues();
   }
 
@@ -89,11 +93,9 @@ export class NgcRangeComponent implements OnInit {
   }
   disallowChangeMinValue(): void {
     this.canSetMin = false;
-    console.log(this.range.lower, this.range.upper);
   }
   disallowChangeMaxValue(): void {
     this.canSetMax = false;
-    console.log(this.range.lower, this.range.upper);
   }
 
 

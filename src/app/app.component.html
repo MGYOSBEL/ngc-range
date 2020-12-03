@@ -1,7 +1,5 @@
-<div class="container">
-  <div>
-      <div >
-        <app-ngc-range [min]="0" [max]="100" [(values)]="rangeValues" (valuesChange)="onRangeChange($event)"></app-ngc-range>
-      </div>
-  </div>
+<div class="app-container">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
 </div>
+
